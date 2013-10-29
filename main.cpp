@@ -1,13 +1,21 @@
-#include <QProcess>
+#include <apacmdln.h>
+#include <apgcli.h>
 #include "aknkeylock.h"
 
 int main(int argc, char *argv[])
 {
-    QProcess *myProcess = new QProcess;
-    myProcess->start("screensaver.exe");
+    CApaCommandLine* commandLine = CApaCommandLine::NewLC();
+    commandLine->SetCommandL(EApaCommandRun);
+    commandLine->SetExecutableNameL(_L("screensaver.exe"));
+    RApaLsSession apaLsSession;
+    User::LeaveIfError(apaLsSession.Connect());
+    CleanupClosePushL(apaLsSession);
+    User::LeaveIfError(apaLsSession.StartApp(*commandLine));
+    CleanupStack::PopAndDestroy(&apaLsSession);
+    CleanupStack::PopAndDestroy(commandLine);
     RAknKeyLock aKeyLock;
-    aKeyLock.Connect();
+    User::LeaveIfError(aKeyLock.Connect());
     aKeyLock.EnableWithoutNote();
     aKeyLock.Close();
-    return 1;
+    return 0;
 }
