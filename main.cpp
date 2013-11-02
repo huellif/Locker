@@ -13,9 +13,10 @@ int main(int argc, char *argv[])
     User::LeaveIfError(apaLsSession.StartApp(*commandLine));
     CleanupStack::PopAndDestroy(&apaLsSession);
     CleanupStack::PopAndDestroy(commandLine);
-    RAknKeyLock aKeyLock;
+    RAknKeyLock aKeyLock;    
+    CleanupClosePushL(aKeyLock);
     User::LeaveIfError(aKeyLock.Connect());
     aKeyLock.EnableWithoutNote();
-    aKeyLock.Close();
+    CleanupStack::PopAndDestroy(&aKeyLock);
     return 0;
 }
