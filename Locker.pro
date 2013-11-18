@@ -1,6 +1,7 @@
 symbian:{
 TARGET.UID3 = 0x20071ae1
-LIBS += -lavkon
+LIBS += -lavkon -lcone
+
 VERSION = 1.2.0
     my_deployment.pkg_prerules += vendorinfo
 
