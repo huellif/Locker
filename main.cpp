@@ -1,5 +1,5 @@
-##include <apgtask.h>
-#include "aknkeylock.h"
+#include <apgtask.h>
+#include <aknkeylock.h>
 
 int main(int argc, char *argv[])
 {    
