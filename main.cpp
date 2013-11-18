@@ -1,18 +1,12 @@
-#include <apacmdln.h>
-#include <apgcli.h>
+##include <apgtask.h>
 #include "aknkeylock.h"
 
 int main(int argc, char *argv[])
-{
-    CApaCommandLine* commandLine = CApaCommandLine::NewLC();
-    commandLine->SetCommandL(EApaCommandRun);
-    commandLine->SetExecutableNameL(_L("screensaver.exe"));
-    RApaLsSession apaLsSession;
-    User::LeaveIfError(apaLsSession.Connect());
-    CleanupClosePushL(apaLsSession);
-    User::LeaveIfError(apaLsSession.StartApp(*commandLine));
-    CleanupStack::PopAndDestroy(&apaLsSession);
-    CleanupStack::PopAndDestroy(commandLine);
+{    
+    RProcess proc;
+    User::LeaveIfError(proc.Create(_L("screensaver.exe"),KNullDesC));
+    proc.Resume();
+    proc.Close();
     RAknKeyLock aKeyLock;    
     CleanupClosePushL(aKeyLock);
     User::LeaveIfError(aKeyLock.Connect());
