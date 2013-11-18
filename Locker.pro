@@ -17,5 +17,3 @@ qtcAddDeployment()
 CONFIG -= qt
 default_deployment.pkg_prerules -= pkg_depends_webkit
 default_deployment.pkg_prerules -= pkg_depends_qt
-
-INCLUDEPATH = C:\QtSDK\Symbian\SDKs\Symbian1Qt473\epoc32\include\

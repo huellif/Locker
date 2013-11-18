@@ -1,6 +1,7 @@
 #include <apgtask.h>
 #include <aknkeylock.h>
 #include <coemain.h>
+
 LOCAL_C void ExeMainL()
 {
     RProcess proc;
