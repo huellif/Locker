@@ -1,13 +1,14 @@
-#include <apgtask.h>
 #include <aknkeylock.h>
-#include <coemain.h>
 
 LOCAL_C void ExeMainL()
 {
+    //enabling screensaver
     RProcess proc;
-    User::LeaveIfError(proc.Create(_L("screensaver.exe"),KNullDesC));
+    User::LeaveIfError(proc.Create(_L("Z:\\sys\\bin\\Screensaver.exe"),KNullDesC));
     proc.Resume();
     proc.Close();
+
+    //locking the phone
     RAknKeyLock aKeyLock;
     CleanupClosePushL(aKeyLock);
     User::LeaveIfError(aKeyLock.Connect());
@@ -17,9 +18,11 @@ LOCAL_C void ExeMainL()
 
 TInt E32Main()
 {
-    CCoeEnv* coe = new CCoeEnv;
-    TRAPD(err, coe->ConstructL());
+    //creating CleanupStack
+    CTrapCleanup* tl=CTrapCleanup::New();
+
+    //Symbian C++ exception handling
     TRAPD(error, ExeMainL());
-    coe->DestroyEnvironment();
-    return 0;
+
+    delete tl;
 }
