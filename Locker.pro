@@ -1,19 +1,14 @@
 symbian:{
 TARGET.UID3 = 0x20071ae1
 LIBS += -lavkon
-
-VERSION = 1.2.1
-    my_deployment.pkg_prerules += vendorinfo
-
-    DEPLOYMENT += my_deployment
-
-    vendorinfo += "%{\"huellifSoft\"}" ":\"huellifSoft\""
+my_deployment.pkg_prerules += vendorinfo
+DEPLOYMENT += my_deployment
+vendorinfo += "%{\"huellifSoft\"}" ":\"huellifSoft\""
+ICON = Locker.svg
 }
+
 SOURCES += main.cpp
-
-include(deployment.pri)
-qtcAddDeployment()
-
+VERSION = 1.3.0
 CONFIG -= qt
 default_deployment.pkg_prerules -= pkg_depends_webkit
 default_deployment.pkg_prerules -= pkg_depends_qt
